@@ -18,6 +18,23 @@ class BookingTest extends TestCase {
 		$this->booking = new Booking();
 	}
 
+    /**  @test */
+    public function createBookings(): void
+    {
+        $data = [
+            'clientid' => 2,
+            'price' => 400,
+            'checkindate' => '2023-08-04 15:00:00',
+            'checkoutdate' => '2023-08-11 15:00:00',
+        ];
+
+        $created = $this->booking->createBooking($data);
+        $bookings = $this->booking->getBookings();
+
+        $this->assertContains($created, $bookings);
+//        $this->assertEquals($created, end($bookings));
+    }
+
 	/** @test */
 	public function getBookings() {
 		$results = $this->booking->getBookings();
