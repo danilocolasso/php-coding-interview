@@ -16,17 +16,18 @@ class BookingModel {
 		$this->bookingData = json_decode($string, true);
 	}
 
-	public function getBookings() {
+	public function getBookings(): array
+    {
 		return $this->bookingData;
 	}
 
     public function createBooking(array $data): array
     {
         $bookings = $this->getBookings();
-        $data['id'] =  end($bookings)['id'] + 1;
+        $data['id'] = end($bookings)['id'] + 1;
         $bookings[] = $data;
 
-        $this->helper->putJson($data, 'bookings');
+        $this->helper->putJson($bookings, 'bookings');
 
         return $data;
     }
